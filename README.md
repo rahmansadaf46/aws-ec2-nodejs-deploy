@@ -34,9 +34,9 @@ Database / External APIs
 
 ## 📁 Directory Structure (Flexible)
 
-This template supports **both common Node.js layouts**.
+This template supports **common Node.js layouts**.
 
-### Option A — Build Output Inside `/dist`
+### Option A — Build Output Inside `/dist/server`
 ```
 
 /var/www/
@@ -57,11 +57,30 @@ ExecStart=/usr/bin/node dist/server/index.js
 
 ---
 
-### Option B — `index.js` in Project Root
+### Option B — Build Output Inside `/dist`
+```
+
+/var/www/
+      └── your-app/
+              ├── dist/
+              │     └── index.js
+              ├── package.json
+              ├── node_modules/
+              └── .env.production
+
+````
+
+**ExecStart**
+```ini
+ExecStart=/usr/bin/node dist/index.js
+````
+
+### Option C — `index.js` in Project Root
 
 ```
 /var/www/
       └── your-app/
+              ├── dist/
               ├── index.js
               ├── package.json
               ├── node_modules/
@@ -138,6 +157,8 @@ WorkingDirectory=/var/www/your-app
 EnvironmentFile=/var/www/your-app/.env.production
 
 ExecStart=/usr/bin/node dist/server/index.js
+# OR
+# ExecStart=/usr/bin/node dist/index.js
 # OR
 # ExecStart=/usr/bin/node index.js
 
